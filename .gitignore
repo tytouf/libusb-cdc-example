@@ -1,0 +1,5 @@
+.vscode
+__pycache__
+C/cdc_example.o
+C/cdc_example
+Python/usb-venv

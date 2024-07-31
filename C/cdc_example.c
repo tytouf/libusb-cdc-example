@@ -13,9 +13,13 @@
 
 /* You may want to change the VENDOR_ID and PRODUCT_ID
  * depending on your device.
- */
+ 
 #define VENDOR_ID      0x2341   // Arduino LLC
 #define PRODUCT_ID     0x0034   // Arduino Leonardo
+*/
+
+#define VENDOR_ID      0x1A86   // CH340 vid
+#define PRODUCT_ID     0x7523   // CH340 pid
 
 #define ACM_CTRL_DTR   0x01
 #define ACM_CTRL_RTS   0x02
@@ -76,7 +80,7 @@ int main(int argc, char **argv)
     /* Set debugging output to max level.
      */
     libusb_set_debug(NULL, 3);
-
+    
     /* Look for a specific device and open it.
      */
     devh = libusb_open_device_with_vid_pid(NULL, VENDOR_ID, PRODUCT_ID);
@@ -84,7 +88,7 @@ int main(int argc, char **argv)
         fprintf(stderr, "Error finding USB device\n");
         goto out;
     }
-
+    
     /* As we are dealing with a CDC-ACM device, it's highly probable that
      * Linux already attached the cdc-acm driver to this device.
      * We need to detach the drivers from all the USB interfaces. The CDC-ACM
@@ -102,7 +106,7 @@ int main(int argc, char **argv)
             goto out;
         }
     }
-
+    return 0;
     /* Start configuring the device:
      * - set line state
      */
